@@ -8,14 +8,24 @@
   <title>코딩애플 자바스크립트</title>
 </head>
 <body>
-  <div class="alert-box" id="alert">알림창</div>
-  <button 
-  onclick="document.getElementById('alert').style.display='block'">버튼</button>
-  <button 
-  onclick="document.getElementById('alert').style.display='none'">닫기</button>
+  <div class="alert-box" id="alert">
+    <p id="title">알림창</p>
+    <button id="close">닫기</button>
+  </div>
+  <button onclick="buttonSwitch('block','아이디를 입력하세요')">버튼1</button>
+  <button onclick="buttonSwitch('block', '비밀번호를 입력하세요')">버튼2</button>
 
   <script>
+    // 콜백함수 : 파라미터자리에 들어가는 함수 
+    // 순차적으로 실행하고 싶을 때 많이 보이는 함수 형태
+    document.getElementById('close').addEventListener('click', function(){
+      document.getElementById('alert').style.display = 'none';
+    });
 
+    function buttonSwitch(text, text2){
+      document.getElementById('alert').style.display = text;
+      document.getElementById('title').innerHTML = text2;
+    }
 
   </script>
 
