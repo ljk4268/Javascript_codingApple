@@ -29,3 +29,13 @@
   visibility: visible;
   opacity: 1;
 }
+
+.light { 
+  background: white;
+  color: black;
+  transition: all 0.4s;
+}
+
+.bg-dark {
+  transition: all 0.4s;
+}
