@@ -58,10 +58,32 @@
 
   <button id="login">로그인</button>
 
-  <div class="alert alert-danger">
+  <!-- <div class="alert alert-danger">
     <span id="num">5</span>초 이내 구매시 사은품 증정
-  </div>
+  </div> -->
 
+  <!-- 캐러셀 구현 -->
+  <div class="slide-main-container">
+
+    <div class="slide-container">
+      <div class="slide-box">
+        <img src="./car1.png">
+      </div>
+      <div class="slide-box">
+        <img src="./car2.png">
+      </div>
+      <div class="slide-box">
+        <img src="./car3.png">
+    </div>
+
+  </div>
+  <button class="prev">이전</button>
+  <button class="slide-1">1</button>
+  <button class="slide-2">2</button>
+  <button class="slide-3">3</button>
+  <button class="next">다음</button>
+
+  </div>
 
 
 
@@ -74,6 +96,97 @@
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
   <script>
+    // 캐러셀 구현
+    // 이전 다음 버튼 
+    // 다음 버튼 눌렀을 때 
+    // 지금 보이는 사진이 1이면 2번 사진 보여주세요. 
+    // 지금 보이는 사진이 2이면 3번 사진 보여주세요. 
+    // slide == 1 > 첫번쨰 사진
+    // slide == 2 > 두번쨰 사진
+    // slide == 3 > 세번쨰 사진
+    
+
+    let imgCount = document.getElementsByClassName('slide-box').length;
+
+    let slide = 0; 
+
+    // slide = 1  일 떄 translateX(-100vw) 2번째사진 
+    // slide = 2  일 떄 translateX(-200vw) 3번째사진 
+    // slide = 3  일 때 버튼 작동 안하거나 맨 처음으로 돌아가기
+
+    $('.next').on('click', function(){
+      // 슬라이드 0일 때 슬라이드 1이 돼 >> 두번째 사진이 보여
+      // 슬라이드 1일 때 슬라이드 2가 돼 >> 세번째 사진이 보여
+      // 슬라이드 2일 때 슬라이드 3가 돼 >> 흰색 배경 보여 
+        slide ++; 
+
+
+        // slide = 1 이고 imgCount = 3 이니까 if문 작동안돼
+        // slide = 2 이고 imgCount = 3 이니까 if문 작동안돼
+        // slide = 3 이고 imgCount = 3 이니까 if문 작동돼
+        if( slide == imgCount ){
+          slide = 2
+        }
+
+
+        // translateX(-100) > 두번쨰사진 좌표
+        // translateX(-200) > 세번쨰사진 좌표
+        // translateX(-300) > 흰색배경 좌표
+        $('.slide-container').css('transform',`translateX(-${slide}00vw)`);
+        console.log('다음버튼', slide)
+    })
+
+    // slide = 2 일 때 세번째 사진 translateX(-100)
+    // slide = 1 일 때 두번째 사진 translateX(0)
+
+    $('.prev').on('click', function(){
+      // slide = 2 일 때 세번째 사진 translateX(-100)
+     // slide = 1 일 때 두번째 사진 translateX(0)
+      slide --;
+      
+      if( slide ==  -1){
+          slide = 0;
+      }
+
+      console.log('이전버튼', slide)
+
+      $('.slide-container').css('transform',`translateX(-${slide}00vw)`);
+
+
+    })
+
+
+
+
+    //전송버튼 누르면 input에 입력한 값이 공백이면 알림창 띄워주세요. 
+    // 정규식으로 이메일형식 검증해보기
+
+
+    let result = document.getElementById('email').value;
+    console.log(result)
+
+    $('form').on('submit', function (e) {
+      e.preventDefault();
+      if (document.getElementById('email').value == '') {
+        alert('아이디 입력해주세요.')
+      }
+      if(/\S+@\S+.\S+/.test(document.getElementById('email').value)){
+        alert('이메일형식아님')
+      }
+      if (document.getElementById('pw').value == '') {
+        alert('비밀번호 입력해주세요.')
+      }
+      if ('A-Z'.inclues(document.getElementById('pw').value)) {
+        alert('비밀번호에 대문자를 넣어주세요.')
+      }
+      if (document.getElementById('pw').value.length < 6) {
+        alert('비밀번호는 8자 이상으로 입력해주세요. ')
+      }
+    })
+
+
+
+
     // ? 초 후 코드 실행
 
 
@@ -90,7 +203,6 @@
       $('.alert').hide();
     }, 5000)
 
-    clearTimeout()
 
 
 
@@ -128,24 +240,7 @@
       $('.black-bg').removeClass('show-modal')
     })
 
-    //전송버튼 누르면 input에 입력한 값이 공백이면 알림창 띄워주세요. 
-
-
-    let result = document.getElementById('email').value;
-    console.log(result)
-
-    $('form').on('submit', function (e) {
-      e.preventDefault();
-      if (document.getElementById('email').value == '') {
-        alert('아이디 입력해주세요.')
-      }
-      if (document.getElementById('pw').value == '') {
-        alert('비밀번호 입력해주세요.')
-      }
-      if (document.getElementById('pw').value.length < 6) {
-        alert('비밀번호는 8자 이상으로 입력해주세요. ')
-      }
-    })
+    
 
   </script>
 
