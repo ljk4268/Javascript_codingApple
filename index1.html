@@ -96,6 +96,45 @@
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
   <script>
+
+    //자바스크립트 return문법 및 소수점에 대한 문제 
+    // 함수에 분과 초를 차례로 파라미터로 입력하면 ms단위로 바꿔서 뱉어주는 함수를 만들어봅시다.
+    // 1초 == 1000ms 
+
+    function test(a, b){
+      let minute = a;
+      let seconds = b;
+      
+      minute = a * 60; 
+      let result = minute + seconds
+      
+      return result * 1000;
+    
+    }
+    console.log(test(1,30))
+
+    // 가격을 파라미터로 입력하면 10% 할인가를 뱉는 함수
+    // 첫 구매여부도 true/false로 둘째파라미터에 입력
+    // 첫 구매가 맞을 경우 추가로 1.5 달러도 할인
+    function test2(a, b){
+    
+      let price = a;
+      let firstPurchase = b;
+
+      let discount = price * 0.1
+      let payment = price - discount
+
+      if ( firstPurchase == false ){
+        return payment
+      } else {
+        return (payment - 1.5).toFixed(1)
+      }
+
+    }
+
+    console.log(test2(10, true))
+
+
     // 캐러셀 구현
     // 이전 다음 버튼 
     // 다음 버튼 눌렀을 때 
@@ -125,15 +164,14 @@
         // slide = 2 이고 imgCount = 3 이니까 if문 작동안돼
         // slide = 3 이고 imgCount = 3 이니까 if문 작동돼
         if( slide == imgCount ){
-          slide = 2
+          slide = 2;
         }
-
 
         // translateX(-100) > 두번쨰사진 좌표
         // translateX(-200) > 세번쨰사진 좌표
         // translateX(-300) > 흰색배경 좌표
         $('.slide-container').css('transform',`translateX(-${slide}00vw)`);
-        console.log('다음버튼', slide)
+
     })
 
     // slide = 2 일 때 세번째 사진 translateX(-100)
